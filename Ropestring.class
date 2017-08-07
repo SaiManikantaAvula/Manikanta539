@@ -1,0 +1,80 @@
+package sarthak;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
+
+class apples
+{
+	public static void main(String args[])
+	{
+		Scanner input = new Scanner(System.in);
+		String s = input.nextLine();
+		System.out.println(method(s));
+	}
+	
+	public static String method(String s)
+	{
+		ArrayList<Integer> evenList = new ArrayList<Integer>();
+		ArrayList<Integer> oddList = new ArrayList<Integer>();
+		int dots=0;
+		for(int i = 0 ; i < s.length() ;)
+		{
+			int count=0;
+			if(s.charAt(i)=='-')
+			{
+				while(i<s.length() && s.charAt(i)=='-' )
+				{
+					
+					i++;
+					count++;
+				}
+				if(count%2==0)
+					evenList.add(count);
+				else
+					oddList.add(count);
+			}
+			else
+			{
+				dots++;
+				i++;
+			}
+		}
+		
+		Collections.sort(evenList);
+		Collections.sort(oddList);
+		String str="";
+
+		while(!evenList.isEmpty())
+		{
+			for(int i=0;i<evenList.get(evenList.size()-1);i++)
+			{
+				str=str+"-";
+			}
+			if(dots!=0)
+			{
+				str=str+".";
+				dots--;
+			}
+			evenList.remove(evenList.size()-1);
+		}
+		while(!oddList.isEmpty())
+		{
+			for(int i=0;i<oddList.get(oddList.size()-1);i++)
+			{
+				str=str+"-";
+			}
+			if(dots!=0)
+			{
+				str=str+".";
+				dots--;
+			}
+			oddList.remove(oddList.size()-1);
+		}
+		while(dots>0)
+		{
+			str=str+".";
+			dots--;
+		}
+		return str;
+	}
+}

@@ -1,0 +1,87 @@
+#include <vector>
+#include <list>
+#include <map>
+#include <set>
+#include <deque>
+#include <cstring>
+#include <stack>
+#include <bitset>
+#include <algorithm>
+#include <functional>
+#include <numeric>
+#include <utility>
+#include <sstream>
+#include <iostream>
+#include <iomanip>
+#include <cstdio>
+#include <cmath>
+#include <cstdlib>
+#include <ctime>
+
+using namespace std;
+
+class CorporationSalary {
+public:
+	long long totalSalary(vector <string>);
+	void dodfs(int i,vector<string> relations, long long int  cost[50] );
+};
+
+long long CorporationSalary::totalSalary(vector <string> relations) {
+
+	long long int cost[50];
+	memset(cost,-1,sizeof(cost));
+	for(int i  = 0 ; i < relations.size() ; i++){
+		if(cost[i]==-1){
+
+			dodfs(i,relations,cost);
+		}
+	}
+	long long sum=0;
+	for(int i = 0 ; i < relations.size() ;i++){
+		sum+=cost[i];
+	}
+	return sum;
+}
+
+void CorporationSalary::dodfs(int src,vector<string> relations, long long int cost[50] ){
+		stack<int> s;
+	s.push(src);
+	cost[src]=0;
+	while(!s.empty()){
+		int x = s.top();
+		cost[x]=0;
+		bool flag=false,nochild=false;
+		for(int i = 0 ; i <relations[0].size() ; i++){
+			if(relations[x][i]=='N')
+			continue;
+			if(relations[x][i]=='Y')
+			nochild=true;
+			if(relations[x][i]=='Y' && cost[i]==-1 ){
+				flag=true;
+				s.push(i);
+				cost[i]=0;
+			}
+			else if(relations[x][i]=='Y' && cost[i]==0){
+				flag=true;
+				s.push(i);
+				cost[i]=0;
+			}
+		}
+		if(!nochild ){
+			cost[x]=1;
+			s.pop();
+		}
+		
+		if(!flag && nochild){
+			for(int i = 0 ; i <relations[0].size() ; i++){
+			if(relations[x][i]=='Y'){
+				cost[x]=cost[x]+cost[i];
+			}	
+			}
+			s.pop();
+		}
+	}
+}
+
+<%:testing-code%>
+//Powered by [KawigiEdit] 2.0!

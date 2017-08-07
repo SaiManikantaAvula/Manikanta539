@@ -1,0 +1,80 @@
+#include <vector>
+#include <list>
+#include <map>
+#include <set>
+#include <deque>
+#include <stack>
+#include <cstring>
+#include <bitset>
+#include <algorithm>
+#include <functional>
+#include <numeric>
+#include <utility>
+#include <sstream>
+#include <iostream>
+#include <iomanip>
+#include <cstdio>
+#include <cmath>
+#include <cstdlib>
+#include <ctime>
+
+using namespace std;
+
+class Quacking {
+public:
+	int quack(string);
+};
+
+int Quacking::quack(string s) {
+	bool used[s.size()];
+	memset(used,0,sizeof(used));
+	int count = 0;
+	for(int k = 0 ; k<s.size() ; k++){
+		int xd=0;
+		int j = 0;
+		for(int i = 0 ; i <s.size() ; i++){
+			if(used[i])
+			xd++;
+			if(j==0 &&  s[i]=='q' && !used[i]){
+				used[i]=true;
+				j++;
+				continue;
+			}
+			else if(j==1 && s[i]=='u' && !used[i]){
+				used[i]=true;
+				j++;
+				continue;
+			}
+			else if(j==2 && s[i]=='a' && !used[i]){
+				used[i]=true;
+				j++;
+				continue;
+			}
+			else if(j==3 && s[i]=='c' && !used[i]){
+				used[i]=true;
+				j++;
+				continue;
+			}
+			else if(j==4 && s[i]=='k' && !used[i]){
+				used[i]=true;
+				j=0;
+				continue;
+			}
+			else{
+				
+			}
+		}	
+		if(xd%5!=0)
+		return -1;
+		if(xd!=s.size() && j==0)
+		count++;
+		else if(xd==s.size())
+		return count;
+		else
+		return -1;
+	}
+	return -1;
+}
+
+<%:testing-code%>
+//Powered by [KawigiEdit] 2.0!

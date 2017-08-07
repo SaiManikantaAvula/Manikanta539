@@ -1,0 +1,27 @@
+import java.util.*;
+public class DNASequence 
+{
+	public static void main(String args[])
+	{
+		System.out.println(longestDNASequence("VVZWKCSIQEGANULDLZESHUYHUQGRKUMFCGTATGOHMLKBIRCA"));
+	}
+	public static int longestDNASequence(String sequence)
+	{
+		int max=0;
+		int local=0;
+		for(int i = 0 ; i<sequence.length() ;i++)
+		{
+			if(in(sequence.charAt(i)))
+			local++;
+			if(max<local)
+				max=local;
+			if(!in(sequence.charAt(i)))
+				local=0;
+		}
+		return max;
+	}
+	public static boolean in(char x)
+	{
+		return x=='A'||x=='C'||x=='G'||x=='T';
+	}
+}

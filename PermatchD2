@@ -1,0 +1,72 @@
+#include <vector>
+#include <list>
+#include <map>
+#include <set>
+#include <deque>
+#include <stack>
+#include <bitset>
+#include <algorithm>
+#include <functional>
+#include <numeric>
+#include <utility>
+#include <sstream>
+#include <iostream>
+#include <iomanip>
+#include <cstdio>
+#include <cmath>
+#include <cstdlib>
+#include <ctime>
+#include <queue>
+#include <cstring>
+
+using namespace std;
+
+class Permatchd2 {
+public:
+	bool visited[50];
+	int fix(vector <string>);
+	pair<int,int> bfs(int i,vector <string> graph);
+};
+
+int Permatchd2::fix(vector <string> graph) {
+	int sum=0;
+	int noofConnectedcomponents=0;
+	memset(visited,-1,sizeof(visited));
+	for(int i = 0 ; i < graph.size() ;i++){
+		if(!visited[i]){
+			noofConnectedcomponents++;
+			pair<int,int> x = bfs(i,graph);
+			int edges = (x.first*(x.first-1))/2;
+			if(x.second%2!=0 && x.first==graph.size() && edges==x.second)
+			return -1;
+			if(x.second%2!=0){
+				sum++;
+			}
+		}
+	}
+	return sum;
+}
+pair<int,int> Permatchd2::bfs(int p,vector <string> graph){
+	queue<int> q;
+	q.push(p);
+	visited[p]=true;
+	int count1=0;
+	int count2=0;
+	while(!q.empty()){
+		int x = q.front();
+		count1++;
+		q.pop();
+		for(int i=0 ; i< graph.size() ;i++){
+			if(i==x)
+			continue;
+			if(graph[x][i]=='Y'){
+				count2++;
+				if(!visited[i]){
+					q.push(i);
+					visited[i]=true;
+				}
+			}
+		}
+	}
+	return make_pair(count1,(count2)/2);
+}

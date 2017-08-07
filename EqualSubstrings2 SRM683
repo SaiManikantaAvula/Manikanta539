@@ -1,0 +1,31 @@
+import java.util.*;
+
+public class EqualSubstrings2 
+{
+	public static void main(String args[])
+	{
+		System.out.println(get(	
+				
+				"onetwothreeonetwothree"));
+	}
+	public static int get(String s)
+	{
+		int count=0;
+		
+		for(int i=1; i<=s.length()/2 ;i++)
+		{
+			for(int j = 0 ; j<s.length() && j+i<=s.length() ;j++)
+			{
+				for(int k=j+i ; k<s.length() &&k+i<=s.length() ;k++)
+				{
+					if(s.substring(j,j+i).compareTo(s.substring(k,k+i))==0)
+					{
+						count++;
+					}
+				}
+			}
+		}
+		return count;
+		
+	}
+}

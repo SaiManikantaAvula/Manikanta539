@@ -1,0 +1,22 @@
+import java.util.Arrays;
+
+public class MultiplicationTable2Easy
+{
+
+	public static String isGoodSet(int[] table, int[] t)
+	{
+		if(t.length==(int)(Math.sqrt(table.length)))
+			return "Good";
+		Arrays.sort(t);
+		for(int i = 0 ; i< t.length ;i++)
+		{
+			for(int j = 0 ; j<t.length ;j++)
+			{
+				int k=Arrays.binarySearch(t,table[t[i]*((int)Math.sqrt(table.length))+t[j]]);
+				if(k<0)
+					return "Not Good";
+			}
+		}
+		return "Good";
+	}
+}

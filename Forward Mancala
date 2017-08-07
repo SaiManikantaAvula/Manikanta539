@@ -1,0 +1,28 @@
+vector <int> ForwardMancala::findMoves(vector <int> start) {
+	vector<int> moves;
+	while(true){
+		int count=0;
+		int min;
+		for(int i = 0 ; i< start.size() ; i++){
+			if(start[i]!=0)
+			{
+				count++;
+				min=i;
+			}
+		}
+		if(count==1)
+		return moves;
+		for(int i = 0 ; i < start.size() ;i++){
+			if(start[i]!=0 && start[i]<start[min])
+			min=i;
+		}
+		int x = start[min];
+		start[min]=0;
+		moves.push_back(min);
+		for(int i = (min+1)%start.size() ; x!=0 ; i=(i+1)%start.size()){
+			start[i]++;
+			x--;
+		}
+	}
+	return moves;
+}

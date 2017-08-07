@@ -1,0 +1,61 @@
+package xax;
+import java.util.*;
+
+public class BichromeBoard
+{
+	public static void main(String args[])
+	{
+		String s[]=	{"B"};
+
+		System.out.println(ableToDraw(s));
+	}
+	
+	public static String ableToDraw(String[] board)
+	{
+		boolean flag=true;
+		
+		String str="Possible";
+		char even='p',odd='c';
+		for(int i = 0 ; i< board.length ;i++)
+		{
+			for(int j = 0 ; j< board[0].length() ;j++)
+			{
+				if(board[i].charAt(j)!='?')
+				{
+					if(flag)
+					{
+						flag=false;
+						if((i+j)%2==0)
+						{
+							even=board[i].charAt(j);
+							odd=xad(board[i].charAt(j));
+						}
+						else
+						{
+							odd=board[i].charAt(j);
+							even=xad(board[i].charAt(j));
+						}
+					}
+					else
+					{
+						if((i+j)%2==0 && board[i].charAt(j)!=even)
+							return "Impossible";
+						else if((i+j)%2!=0 && board[i].charAt(j)!=odd)
+							return "Impossible";
+					}
+					
+				}
+			}
+		}
+		
+		return str;
+	}
+	
+	public static char xad(char x)
+	{
+		if(x=='W')
+			return 'B';
+		else
+			return 'W';
+	}
+}
